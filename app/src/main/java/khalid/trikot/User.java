@@ -1,7 +1,7 @@
 package khalid.trikot;
 
 /**
- * Created by khalid on 17-07-04.
+ * User class - Stores user information
  */
 public class User {
     private String userName;
@@ -9,7 +9,7 @@ public class User {
     private String path;
 
     public User(){
-
+        //Empty constructor
     }
 
     public User(String userName, String email){
