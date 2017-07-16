@@ -9,6 +9,7 @@ import java.util.Calendar;
 public class Match {
     private String id;
     private String name;
+    private String locationName;
     private String latitude;
     private String longitude;
     private Calendar matchTime = Calendar.getInstance();
@@ -26,6 +27,10 @@ public class Match {
      */
     public String getId() {
         return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     /**
@@ -61,6 +66,54 @@ public class Match {
     }
 
     /**
+     * Getter for location name, if there is one
+     * @return Match location name
+     */
+    public String getLocationName() {
+        return locationName;
+    }
+
+    /**
+     * Setter for location name
+     * @param locationName Match location name
+     */
+    public void setLocationName(String locationName) {
+        this.locationName = locationName;
+    }
+
+    /**
+     * Getter for Match attendees
+     * @return ArrayList of User ID strings
+     */
+    public ArrayList<String> getAttendees() {
+        return attendees;
+    }
+
+    /**
+     * Setter for Match attendees
+     * @param attendees ArrayList of User ID strings
+     */
+    public void setAttendees(ArrayList<String> attendees) {
+        this.attendees = attendees;
+    }
+
+    /**
+     * Getter for Owner User ID
+     * @return User ID String of Owner User
+     */
+    public String getOwner() {
+        return owner;
+    }
+
+    /**
+     * Setter for Owner User ID
+     * @param owner Match Owner User ID String
+     */
+    public void setOwner(String owner) {
+        this.owner = owner;
+    }
+
+    /**
      * Getter for Match's name
      * @return Match's name
      */
@@ -85,6 +138,13 @@ public class Match {
         return matchTime;
     }
 
+    /**
+     * Setter for Match datetime Calender object
+     * @param matchTime Calender object containing updated matchtime 
+     */
+    public void setMatchTime(Calendar matchTime) {
+        this.matchTime = matchTime;
+    }
 
     /**
      * Helper method for setting Match's date and time in millis
