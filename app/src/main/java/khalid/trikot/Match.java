@@ -1,12 +1,18 @@
 package khalid.trikot;
 
+import android.support.v7.widget.RecyclerView;
+import android.view.View;
+import android.widget.TextView;
+
+import com.mikepenz.fastadapter.items.AbstractItem;
+
 import java.util.ArrayList;
 import java.util.Calendar;
 
 /**
  * Match class - Stores match information
  */
-public class Match {
+public class Match extends AbstractItem<Match, Match.ViewHolder> {
     private String id;
     private String name;
     private String locationName;
@@ -22,6 +28,11 @@ public class Match {
      * Empty contructor
      */
     public Match(){}
+
+    @Override
+    public ViewHolder getViewHolder(View v) {
+        return null;
+    }
 
     /**
      * Getter for match ID
@@ -195,5 +206,35 @@ public class Match {
     public void setPitchType(String pitchType) {
         this.pitchType = pitchType;
     }
+
+    @Override
+    public int getType() {
+        return 0;
+    }
+
+    @Override
+    public int getLayoutRes() {
+        return R.layout.fragment_match_list_item;
+    }
+
+    protected static class ViewHolder extends RecyclerView.ViewHolder {
+        public final View mView;
+        public final TextView mIdView;
+        public final TextView mContentView;
+
+        public ViewHolder(View view) {
+            super(view);
+            mView = view;
+            mIdView = (TextView) view.findViewById(R.id.id);
+            mContentView = (TextView) view.findViewById(R.id.content);
+        }
+
+        @Override
+        public String toString() {
+            return super.toString() + " '" + mContentView.getText() + "'";
+        }
+    }
 }
+
+
 
