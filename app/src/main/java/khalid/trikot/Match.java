@@ -8,12 +8,14 @@ import com.mikepenz.fastadapter.items.AbstractItem;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.LinkedList;
+import java.util.List;
 
 /**
  * Match class - Stores match information
  */
 public class Match extends AbstractItem<Match, Match.ViewHolder> {
-    private String id;
+    private int id;
     private String name;
     private String locationName;
     private String latitude;
@@ -24,25 +26,31 @@ public class Match extends AbstractItem<Match, Match.ViewHolder> {
     private int aSide;
     private ArrayList<String> attendees;
 
-    /**
-     * Empty contructor
-     */
-    public Match(){}
+    //Contructor
+    public Match(int id, String name, String locationName){
+        this.id = id;
+        this.name = name;
+        this.locationName = locationName;
+    }
 
-    @Override
-    public ViewHolder getViewHolder(View v) {
-        return null;
+    //Method for outputting dummy matches to populate RecyclerView
+    public List<Match> loadMatches(){
+        List<Match> list = new LinkedList<>();
+        for(int i = 0; i <=5; i++){
+            list.add(new Match(i, "Match " + i, "Location " + i));
+        }
+        return list;
     }
 
     /**
      * Getter for match ID
      * @return Match id
      */
-    public String getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -207,6 +215,7 @@ public class Match extends AbstractItem<Match, Match.ViewHolder> {
         this.pitchType = pitchType;
     }
 
+
     @Override
     public int getType() {
         return 0;
@@ -217,21 +226,40 @@ public class Match extends AbstractItem<Match, Match.ViewHolder> {
         return R.layout.fragment_match_list_item;
     }
 
+    @Override
+    public ViewHolder getViewHolder(View v) {
+        return null;
+    }
+
+    //The logic to bind your data to the view
+    @Override
+    public void bindView(ViewHolder viewHolder, List<Object> payloads) {
+        //call super so the selection is already handled for you
+        super.bindView(viewHolder, payloads);
+
+        //bind our data
+        //set the text for the name
+        viewHolder.matchName.setText(name);
+        //set the text for the description or hide
+        viewHolder.matchLocation.setText(locationName);
+    }
+
+
     protected static class ViewHolder extends RecyclerView.ViewHolder {
         public final View mView;
-        public final TextView mIdView;
-        public final TextView mContentView;
+        public final TextView matchName;
+        public final TextView matchLocation;
 
         public ViewHolder(View view) {
             super(view);
             mView = view;
-            mIdView = (TextView) view.findViewById(R.id.id);
-            mContentView = (TextView) view.findViewById(R.id.content);
+            matchName = (TextView) view.findViewById(R.id.item_match_name);
+            matchLocation = (TextView) view.findViewById(R.id.item_match_location);
         }
 
         @Override
         public String toString() {
-            return super.toString() + " '" + mContentView.getText() + "'";
+            return super.toString() + " '" + matchLocation.getText() + "'";
         }
     }
 }
