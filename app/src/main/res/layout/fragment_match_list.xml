@@ -10,4 +10,4 @@
     android:layout_marginRight="16dp"
     app:layoutManager="LinearLayoutManager"
     tools:context="khalid.trikot.MatchListFragment"
-    tools:listitem="@layout/fragment_matchlist" />
+    tools:listitem="@layout/fragment_match_list_item" />
