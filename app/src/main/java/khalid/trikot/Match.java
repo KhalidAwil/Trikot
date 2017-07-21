@@ -14,6 +14,8 @@ public class Match {
     private String longitude;
     private Calendar matchTime = Calendar.getInstance();
     private String owner;
+    private String pitchType;
+    private int aSide;
     private ArrayList<String> attendees;
 
     /**
@@ -140,7 +142,7 @@ public class Match {
 
     /**
      * Setter for Match datetime Calender object
-     * @param matchTime Calender object containing updated matchtime 
+     * @param matchTime Calender object containing updated matchtime
      */
     public void setMatchTime(Calendar matchTime) {
         this.matchTime = matchTime;
@@ -160,6 +162,38 @@ public class Match {
      */
     public void setMatchtimeValue(Calendar matchtime){
         setMatchTime(matchtime.getTimeInMillis());
+    }
+
+    /**
+     * Getter for Match "# a side" value
+     * @return Match "A Side" value
+     */
+    public int getaSide() {
+        return aSide;
+    }
+
+    /**
+     * Setter for Match "# a side" value
+     * @param aSide Match "A Side" value
+     */
+    public void setaSide(int aSide) {
+        this.aSide = aSide;
+    }
+
+    /**
+     * Getter for Match Pitch Type String value - Ex. "Turf, Grass, Concrete, Wood..."
+     * @return Match Pitch Type value
+     */
+    public String getPitchType() {
+        return pitchType;
+    }
+
+    /**
+     * Setter for Match Pitch Type String value
+     * @param pitchType Match Pitch type string value
+     */
+    public void setPitchType(String pitchType) {
+        this.pitchType = pitchType;
     }
 }
 
