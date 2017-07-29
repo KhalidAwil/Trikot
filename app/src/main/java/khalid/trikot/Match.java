@@ -228,7 +228,7 @@ public class Match extends AbstractItem<Match, Match.ViewHolder> {
 
     @Override
     public ViewHolder getViewHolder(View v) {
-        return null;
+        return new ViewHolder(v);
     }
 
     //The logic to bind your data to the view
@@ -244,22 +244,14 @@ public class Match extends AbstractItem<Match, Match.ViewHolder> {
         viewHolder.matchLocation.setText(locationName);
     }
 
-
     protected static class ViewHolder extends RecyclerView.ViewHolder {
-        public final View mView;
-        public final TextView matchName;
-        public final TextView matchLocation;
+        protected TextView matchName;
+        protected TextView matchLocation;
 
         public ViewHolder(View view) {
             super(view);
-            mView = view;
             matchName = (TextView) view.findViewById(R.id.item_match_name);
             matchLocation = (TextView) view.findViewById(R.id.item_match_location);
-        }
-
-        @Override
-        public String toString() {
-            return super.toString() + " '" + matchLocation.getText() + "'";
         }
     }
 }
