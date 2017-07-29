@@ -10,24 +10,20 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import khalid.trikot.dummy.DummyContent;
+import com.mikepenz.fastadapter.commons.adapters.FastItemAdapter;
+
+import khalid.trikot.Match;
 import khalid.trikot.dummy.DummyContent.DummyItem;
 
+import java.util.LinkedList;
 import java.util.List;
 
-/**
- * A fragment representing a list of Items.
- * <p/>
- * Activities containing this fragment MUST implement the {@link OnListFragmentInteractionListener}
- * interface.
- */
 public class MatchListFragment extends Fragment {
 
     // TODO: Customize parameter argument names
     private static final String ARG_COLUMN_COUNT = "column-count";
     // TODO: Customize parameters
     private int mColumnCount = 1;
-    private OnListFragmentInteractionListener mListener;
 
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
@@ -65,12 +61,18 @@ public class MatchListFragment extends Fragment {
             Context context = view.getContext();
             RecyclerView recyclerView = (RecyclerView) view;
             if (mColumnCount <= 1) {
-                recyclerView.setLayoutManager(new LinearLayoutManager(context));
+                recyclerView.setLayoutManager(new LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false));
             } else {
                 recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
             }
-            recyclerView.setAdapter(new MatchListRecyclerViewAdapter(DummyContent.ITEMS, mListener));
+
+            FastItemAdapter<Match> fastAdapter = new FastItemAdapter<>();
+            recyclerView.setAdapter(fastAdapter);
+            List<Match> matches = loadMatches();
+
+            fastAdapter.add(matches);
         }
+
         return view;
     }
 
@@ -78,32 +80,18 @@ public class MatchListFragment extends Fragment {
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        if (context instanceof OnListFragmentInteractionListener) {
-            mListener = (OnListFragmentInteractionListener) context;
-        } else {
-            throw new RuntimeException(context.toString()
-                    + " must implement OnListFragmentInteractionListener");
-        }
     }
 
     @Override
     public void onDetach() {
         super.onDetach();
-        mListener = null;
     }
 
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     * <p/>
-     * See the Android Training lesson <a href=
-     * "http://developer.android.com/training/basics/fragments/communicating.html"
-     * >Communicating with Other Fragments</a> for more information.
-     */
-    public interface OnListFragmentInteractionListener {
-        // TODO: Update argument type and name
-        void onListFragmentInteraction(DummyItem item);
+    public List<Match> loadMatches(){
+        List<Match> list = new LinkedList<>();
+        for(int i = 0; i <=5; i++){
+            list.add(new Match(i, "Match " + i, "Location " + i));
+        }
+        return list;
     }
 }
